@@ -1,0 +1,16 @@
+{
+  "name": "mediago",
+  "version": "1.0.0",
+  "description": "a media transfer demo with webrtc technology",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "ws": "^7.1.2"
+  }
+}
