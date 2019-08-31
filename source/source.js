@@ -1,13 +1,15 @@
-//**********************
-//Init ws module
-//**********************
-var serverip = location.hostname;
-var serverurl = 'ws://'+serverip+":9091";
+/*
+*本js虽然作为webrtc的一部分，但是把呼叫功能阉割掉了，只能作为接收端。
+ */
+
+
 //var conn = new WebSocket('ws://118.25.176.33:9091');
 //var conn = new WebSocket('ws://localhost:9091');
+var servernameInput = document.querySelector('#servernameInput');
+var servername = servernameInput.value;
+servername = servername.replace(/(^\s*)|(\s*$)/g, ""); 	//替换输入内容当中所有的空字符，包括全角空格，半角都替换""
+var serverurl = 'ws://'+servername+":9091";
 var conn = new WebSocket(serverurl);
-//console.log(serverurl);
-
 
 //本地登录用户our username
 var myUsername = null;
@@ -23,15 +25,14 @@ var RTCPeerConnectionCreated = false;
 //******
 //UI selectors block
 //******
-
 var loginPage = document.querySelector('#loginPage');
-var usernameInput = document.querySelector('#usernameInput');
 var loginBtn = document.querySelector('#loginBtn');
+var servernameInput = document.querySelector('#servernameInput');
+var usernameInput = document.querySelector('#usernameInput');
 
 var callPage = document.querySelector('#callPage');
-var callToUsernameInput = document.querySelector('#callToUsernameInput');
-var callBtn = document.querySelector('#callBtn');
-
+var startBtn = document.querySelector('#startBtn');
+var closeBtn = document.querySelector('#closeBtn');
 var hangUpBtn = document.querySelector('#hangUpBtn');
 
 var localVideo = document.querySelector('#localVideo');
@@ -41,11 +42,36 @@ loginPage.style.display = "block";
 callPage.style.display = "none";
 
 //******
-//ws eventHandler
+//execute main
 //******
-conn.onopen = function () {
-    console.log("Connected to the signaling server");
-};
+//打开网页就已经通过ws和服务器连接了.并在服务器创建用户，这个过程只执行一次
+//login button handler
+loginBtn.addEventListener("click", function () {
+    //**********************
+    //Init ws module
+    //**********************
+
+    //接下来处理username部分
+    var usernameInput = document.querySelector('#usernameInput');
+    myUsername = usernameInput.value;
+    myUsername = myUsername.replace(/(^\s*)|(\s*$)/g, ""); 	//替换输入内容当中所有的空字符
+    autoLogin();
+
+});
+
+//******
+//UI events definitatoin
+//******
+// Login when the user clicks the button
+function autoLogin() {
+    //myUsername = usernameInput.value;  //用户名写死为car
+    if (myUsername.length > 0) {
+        sendToServer({
+            type: "login",
+            name: myUsername
+        });
+    }
+}
 
 //when we got a message from a signaling server
 conn.onmessage = function (msg) {
@@ -85,7 +111,15 @@ conn.onerror = function (err) {
     console.log("Got error", err);
 };
 
+//******
+//ws eventHandler
+//******
+conn.onopen = function () {
+    console.log("Connected to the signaling server");
+};
+
 //alias for sending JSON encoded messages
+//发送给服务器，然后服务器再转发给另外一个客户端
 function sendToServer(message) {
     //attach the other peer username to our messages
     if (connectedUsername) {
@@ -94,35 +128,23 @@ function sendToServer(message) {
     conn.send(JSON.stringify(message));
 };
 
-
-//******
-//UI events definitatoin
-//******
-// Login when the user clicks the button
-loginBtn.addEventListener("click", function (event) {
-    myUsername = usernameInput.value;
-    if (myUsername.length > 0) {
-        sendToServer({
-            type: "login",
-            name: myUsername
-        });
-    }
-});
-
+//当登录进服务器时，服务器会回复给我们，需要处理的事件
 function handleLogin(success) {
     if (success === false) {
-        alert("Ooops...try a different username");
+        alert("Ooops...maybe the same username in server,try a different username");
     } else {
         loginPage.style.display = "none";
         callPage.style.display = "block";
-
+/*
         //getting local video stream
         navigator.mediaDevices.getUserMedia({
             video: true, audio: true
         }).then(streamHandler).catch(errorHandler);
-
+*/
     }
 };
+
+
 
 //when somebody sends us an offer
 async function handleOffer(offer, name) {
@@ -131,24 +153,15 @@ async function handleOffer(offer, name) {
         initPeer();
     }
     connectedUsername = name;
-/*以下的代码，rollback只有火狐浏览器才支持
-    // We need to set the remote description to the received SDP offer
-    // so that our local WebRTC layer knows how to talk to the caller.
-    // if the singnaling is not stable state, use type rollback to roll
-    // the incomplete signaling peer connection back to "stable" state.
-    // Because we call setLocalDescription before, maybe the PeerConnection
-    // are still in "have-local-offer" state,so the process need to
-    // rollback to "stable" state before you can reuse the connection.
-    if (myPeerConnection.signalingState != "stable") {
-        await Promise.all([
-            myPeerConnection.setLocalDescription({type: "rollback"}),
-            myPeerConnection.setRemoteDescription(new RTCSessionDescription(offer))
-        ]);
-        return;
-    }else{
-        await myPeerConnection.setRemoteDescription(new RTCSessionDescription(offer));
+    //如果当前页面没有打开媒体流，则告知对方
+    if( stream == null || !stream.active ){
+        sendToServer({
+            type: "erralert",
+            info: "It seems that the other side have not open the camera",
+            close: false
+        });
     }
-*/
+
     await myPeerConnection.setRemoteDescription(new RTCSessionDescription(offer));
     //create an answer to an offer
     myPeerConnection.createAnswer().then(function (answer) {
@@ -173,6 +186,7 @@ function handleCandidate(candidate) {
 };
 
 function handleLeave() {
+
     //attention sequence
     connectedUsername = null;
     remoteVideo.src = null;
@@ -184,39 +198,36 @@ function handleLeave() {
     myPeerConnection.ontrack = null;
     myPeerConnection.onsignalingstatechange = null;
     myPeerConnection.onicegatheringstatechange = null;
-    myPeerConnection.onnotificationneeded = null;
+    //myPeerConnection.onnotificationneeded = null;
     myPeerConnection.close();
     myPeerConnection = null;
 
     RTCPeerConnectionCreated = false;
 
-    hangUpBtn.disabled = true;
-    callBtn.disabled = false;
+    hangUpBtn.disabled  = true;
 
 };
 
-//initiating a call，before call,peerConnection must be created and setted
-callBtn.addEventListener("click", function () {
 
-    //caller must init RTCPeerConnection
-    initPeer();
-    //sendOffer，createOffer现在放到处理onnegotiationneeded的事件中去了
-/*
-    var callToUsername = callToUsernameInput.value;
-    if (callToUsername.length > 0) {
-        connectedUsername = callToUsername;
-        // create an offer
-        myPeerConnection.createOffer().then(function(offer){
-            myPeerConnection.setLocalDescription(offer);
-            sendToServer({
-                type: "offer",
-                offer: offer
-            });
-        }).catch(function (error) {
-            alert("Error when creating an offer");
-        });
-    }
-*/
+//打开关闭摄像头的按钮只和音视频采集有关，不涉及ws传输逻辑
+//改成打开摄像头
+startBtn.addEventListener("click", function () {
+    //getting local video stream
+    navigator.mediaDevices.getUserMedia({
+        video: true, audio: true
+    }).then(streamHandler).catch(errorHandler);
+
+    startBtn.disabled = true;
+    closeBtn.disabled = false;
+
+});
+//改成关闭摄像头
+closeBtn.addEventListener("click", function () {
+
+    stream.getTracks().forEach(track => track.stop());
+
+    startBtn.disabled = false;
+    closeBtn.disabled = true;
 
 
 });
@@ -233,7 +244,6 @@ hangUpBtn.addEventListener("click", function () {
         type: "leave"
     });
     handleLeave();
-    //并告诉对方我已挂断
 
 });
 
@@ -295,7 +305,7 @@ function initPeer()
         myPeerConnection.oniceconnectionstatechange = handleIceConnectionStateChangeEvent;
         myPeerConnection.onicegatheringstatechange = handleIceGatheringStateChangeEvent;
         myPeerConnection.onsignalingstatechange = handleSignalingStateChangeEvent;
-        myPeerConnection.onnegotiationneeded = handleNegotiationNeededEvent;
+        //myPeerConnection.onnegotiationneeded = handleNegotiationNeededEvent;
 
         RTCPeerConnectionCreated = true;
     }catch (e) {
@@ -319,6 +329,7 @@ async function handleIceCandidate(event) {
     }
 }
 
+// 能触发这个表明已经连接成功并且媒体流已经在暗流涌动了，接下来在他里面使用媒体流即可！
 // Called by the WebRTC layer when events occur on the media tracks
 // on our WebRTC call. This includes when streams are added to and
 // removed from the call.
@@ -336,8 +347,7 @@ async function handleRemoteTrackAdded(e) {
     //remoteVideo.srcObject = window.URL.createObjectURL(e.stream);
     remoteVideo.srcObject = e.streams[0];
     //once add remote video success, we set call button disabled
-    hangUpBtn.disabled = false; //放这里可能并不太好
-    callBtn.disabled = true;
+    hangUpBtn.disabled = false;
 }
 //since addstream is desperated
 async function handleRemoteStreamAdded(e) {
@@ -345,7 +355,6 @@ async function handleRemoteStreamAdded(e) {
     remoteVideo.srcObject = e.stream;
     //once add remote video success, we set call button disabled
     hangUpBtn.disabled = false;
-    callBtn.disabled = true;
 }
 
 // Handle |iceconnectionstatechange| events. This will detect
@@ -398,83 +407,4 @@ async function handleSignalingStateChangeEvent(event) {
     }
 }
 
-//Called by the WebRTC layer to let us know when it's time to
-// begin, resume, or restart ICE negotiation.
 
-async function handleNegotiationNeededEvent() {
-    console.log("*** Negotiation needed event");
-
-    try {
-        // If the connection hasn't yet achieved the "stable" state,
-        // return to the caller. Another negotiationneeded event
-        // will be fired when the state stabilizes.
-        if (myPeerConnection.signalingState != "stable") {
-            console.log("-- The connection isn't stable yet; postponing...")
-            //await myPeerConnection.setLocalDescription({type: "rollback"});//目前只有火狐支持
-            return;
-        }
-
-        console.log("---> Creating offer");
-
-        var callToUsername = callToUsernameInput.value;
-        if (callToUsername === myUsername) {
-            alert("can't let you talk to yourself. That would be weird.");
-            return;
-        }
-        if (callToUsername.length > 0) {
-            connectedUsername = callToUsername;
-            // create an offer
-
-            //method1
-            const offer = await myPeerConnection.createOffer();
-            await myPeerConnection.setLocalDescription(offer);
-            sendToServer({
-                type: "offer",
-                offer: offer
-            });
-
-            // 用promise方法，每次a呼叫b，主动断开，再由b呼叫a，
-            // 就会导致myPeerConnection处于have-local-offer的非stable状态。
-            /*
-            //method2
-            myPeerConnection.createOffer().then(function(offer){
-                //这种写法每次到这里返回的总是为have-local-offer状态很奇怪
-                console.log('[Negotiation]cur signalstate:'+myPeerConnection.signalingState);
-                myPeerConnection.setLocalDescription(offer);
-                sendToServer({
-                    type: "offer",
-                    offer: offer
-                });
-            }).catch(function (error) {
-                console.log(`Error ${error.name}: ${error.message}`);
-                alert("Error when creating an offer");
-            });
-            */
-
-            /*
-            //method3
-            //这里的promise多用了一个then,但是有问题
-            //offer和myPeerConnection.localDescription等价
-            myPeerConnection.createOffer().then(function(offer) {
-                //和上面一样，这种写法每次到这里返回的总是为have-local-offer状态很奇怪
-                return myPeerConnection.setLocalDescription(offer);
-                //myPeerConnection.setLocalDescription(offer);
-            }).then(function(){
-                sendToServer({
-                    type: "offer",
-                    offer: myPeerConnection.localDescription
-                });
-            }).catch(function (error) {
-                console.log(`Error ${error.name}: ${error.message}`);
-                alert("Error when creating an offer");
-            });
-            */
-
-        }
-
-    } catch(err) {
-        console.log("*** The following error occurred while handling the negotiationneeded event:");
-        //reportError(err);
-        console.log(`Error ${err.name}: ${err.message}`);
-    };
-}

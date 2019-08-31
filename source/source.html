@@ -37,11 +37,14 @@
         <div class = "col-md-4 col-md-offset-4">
             <h2>WebRTC Video Demo. Please sign in</h2>
             <label for = "usernameInput" class = "sr-only">Login</label>
-            <input type = "email" id = "usernameInput" value="sourceVideo"
-                   class = "form-control formgroup" placeholder = "Login"
-                   required = "" autofocus = "" readonly>
+            <input type = "email" id = "servernameInput" c
+                   lass = "form-control formgroup" placeholder = "Server Name"
+                   required = "" autofocus = "" value="localhost" readonly>
+            <input type = "email" id = "usernameInput" c
+                   lass = "form-control formgroup" placeholder = "Login"
+                   required = "" autofocus = "" value="car">
             <button id = "loginBtn" class = "btn btn-lg btn-primary btnblock">
-                开始fpv之旅</button>
+                连接服务器</button>
         </div>
     </div>
 </div>
@@ -50,14 +53,13 @@
     <video id = "remoteVideo" autoplay></video>
     <div class = "row text-center">
         <div class = "col-md-12">
-            <input id = "callToUsernameInput" type = "text"
-                   placeholder = "username to call" />
-            <button id = "callBtn" class = "btn-success btn">Call</button>
-            <button id = "hangUpBtn" class = "btn-danger btn">Hang Up</button>
+            <button id = "startBtn" class = "btn-success btn">打开摄像头</button>
+            <button id = "closeBtn" class = "btn-fail btn">关闭摄像头</button>
+            <button id = "hangUpBtn" class = "btn-danger btn">挂断</button>
         </div>
     </div>
 </div>
 <script src = "adapter.js"></script>
-<script src = "monitor.js"></script>
+<script src = "source.js"></script>
 </body>
 </html>

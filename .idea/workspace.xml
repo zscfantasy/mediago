@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="073be73b-0969-4711-91af-6140a0b49676" name="Default Changelist" comment="20190831">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monitor/monitor.html" beforeDir="false" afterPath="$PROJECT_DIR$/monitor/monitor.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/monitor/monitor.js" beforeDir="false" afterPath="$PROJECT_DIR$/monitor/monitor.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/source.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/source.html" beforeDir="false" afterPath="$PROJECT_DIR$/source/source.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -19,112 +16,92 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.52955663">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/monitor/monitor.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="510">
-                  <caret line="34" column="29" selection-start-line="34" selection-start-column="29" selection-end-line="34" selection-end-column="29" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/server.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="229">
-                  <caret line="33" column="23" selection-start-line="33" selection-start-column="23" selection-end-line="33" selection-end-column="23" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/monitor/monitor.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="318">
-                  <caret line="74" column="50" selection-start-line="74" selection-start-column="50" selection-end-line="74" selection-end-column="50" />
-                  <folding>
-                    <element signature="n#!!doc" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$USER_HOME$/Develop/samples-server-master/s/webrtc-from-chat/index.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="53">
-                  <caret line="32" column="57" selection-start-line="32" selection-start-column="52" selection-end-line="32" selection-end-column="57" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$USER_HOME$/Develop/samples-server-master/s/webrtc-from-chat/chatclient.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-341">
-                  <caret line="144" column="26" selection-start-line="144" selection-start-column="12" selection-end-line="144" selection-end-column="26" />
-                  <folding>
-                    <element signature="n#!!doc" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$USER_HOME$/Develop/samples-server-master/s/webrtc-from-chat/chatserver.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-240">
-                  <caret line="94" column="9" selection-start-line="94" selection-start-column="9" selection-end-line="94" selection-end-column="9" />
-                  <folding>
-                    <element signature="n#!!doc" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/monitor/monitor.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="233">
+              <caret line="42" column="34" selection-start-line="42" selection-start-column="34" selection-end-line="42" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="23">
+              <caret line="131" column="44" selection-start-line="131" selection-start-column="44" selection-end-line="131" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/monitor/monitor.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="281" column="61" selection-start-line="281" selection-start-column="39" selection-end-line="281" selection-end-column="61" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/source/source.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="86">
+              <caret line="331" column="44" selection-start-line="331" selection-start-column="44" selection-end-line="331" selection-end-column="44" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/source.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="293">
+              <caret line="49" column="6" lean-forward="true" selection-start-line="49" selection-start-column="6" selection-end-line="49" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>handleLogin</find>
-      <find>handleCandidate</find>
-      <find>getUserMedia</find>
-      <find>candidate</find>
-      <find>onadd</find>
-      <find>sendJson</find>
-      <find>closeVideoCall</find>
-      <find>sendTo</find>
-      <find>sendToSever</find>
-      <find>stable</find>
-      <find>createOffer</find>
-      <find>console.log</find>
-      <find>handleAnswer</find>
-      <find>sendToServer</find>
-      <find>yourConn</find>
-      <find>name</find>
-      <find>handleOffer</find>
-      <find>connectedUser</find>
-      <find>setRemoteDescription</find>
-      <find>await</find>
-      <find>handleSignalingStateChangeEvent</find>
-      <find>rollback</find>
-      <find>sendUTF</find>
-      <find>myUsername</find>
-      <find>self</find>
-      <find>rejectusername</find>
-      <find>video</find>
       <find>otherName</find>
       <find>url</find>
+      <find>createPeerConnection</find>
+      <find>callBtn</find>
+      <find>loginPage</find>
+      <find>autoLogin</find>
+      <find>initPeer();</find>
+      <find>addEventListener</find>
+      <find>oops</find>
+      <find>autoLogin();</find>
       <find>users</find>
+      <find>stream</find>
+      <find>createPeerConnection();</find>
+      <find>video</find>
+      <find>track</find>
+      <find>serveripInput</find>
+      <find>initPeer</find>
+      <find>normalinfo</find>
+      <find>addIceCandidate</find>
+      <find>callToUsernameInput</find>
+      <find>candidate</find>
+      <find>loginPage.style.display</find>
+      <find>conn</find>
+      <find>leave</find>
+      <find>startBtn</find>
+      <find>try a</find>
+      <find>对方</find>
+      <find>hangupBtn</find>
+      <find>hangUpBtn.disabled</find>
+      <find>handleRemoteTrackAdded</find>
     </findStrings>
     <replaceStrings>
       <replace>sendToSever</replace>
@@ -144,11 +121,11 @@
         <option value="$PROJECT_DIR$/client/client.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/monitor2.html" />
-        <option value="$PROJECT_DIR$/source/source.html" />
-        <option value="$PROJECT_DIR$/source/source.js" />
         <option value="$PROJECT_DIR$/monitor/monitor.html" />
+        <option value="$PROJECT_DIR$/source/source.html" />
         <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/monitor/monitor.js" />
+        <option value="$PROJECT_DIR$/source/source.js" />
       </list>
     </option>
   </component>
@@ -233,18 +210,17 @@
       <workItem from="1567093711244" duration="91000" />
       <workItem from="1567126352173" duration="1239000" />
       <workItem from="1567129641864" duration="23728000" />
-      <workItem from="1567217532436" duration="9139000" />
+      <workItem from="1567217532436" duration="23350000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42360000" />
+    <option name="totallyTimeSpent" value="56571000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="801" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14164905" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18957011" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -258,7 +234,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.24400564" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.31170663" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -310,25 +286,20 @@
     <entry file="file://$PROJECT_DIR$/index.html" />
     <entry file="file://$PROJECT_DIR$/monitor2.html" />
     <entry file="file://$PROJECT_DIR$/source/monitor.js" />
-    <entry file="file://$PROJECT_DIR$/source/source.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="43" column="23" selection-start-line="43" selection-start-column="23" selection-end-line="43" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/source.js" />
-    <entry file="file://$PROJECT_DIR$/monitor/monitor.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="29" selection-start-line="34" selection-start-column="29" selection-end-line="34" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Develop/samples-server-master/s/webrtc-from-chat/chatserver.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-240">
           <caret line="94" column="9" selection-start-line="94" selection-start-column="9" selection-end-line="94" selection-end-column="9" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Develop/samples-server-master/s/webrtc-from-chat/chatclient.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="545" column="27" selection-start-line="545" selection-start-column="4" selection-end-line="545" selection-end-column="27" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -342,27 +313,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Develop/samples-server-master/s/webrtc-from-chat/chatclient.js">
+    <entry file="file://$PROJECT_DIR$/monitor/monitor.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-341">
-          <caret line="144" column="26" selection-start-line="144" selection-start-column="12" selection-end-line="144" selection-end-column="26" />
+        <state relative-caret-position="233">
+          <caret line="42" column="34" selection-start-line="42" selection-start-column="34" selection-end-line="42" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/source.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="293">
+          <caret line="49" column="6" lean-forward="true" selection-start-line="49" selection-start-column="6" selection-end-line="49" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="131" column="44" selection-start-line="131" selection-start-column="44" selection-end-line="131" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/monitor/monitor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="281" column="61" selection-start-line="281" selection-start-column="39" selection-end-line="281" selection-end-column="61" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
+    <entry file="file://$PROJECT_DIR$/source/source.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="33" column="23" selection-start-line="33" selection-start-column="23" selection-end-line="33" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/monitor/monitor.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="74" column="50" selection-start-line="74" selection-start-column="50" selection-end-line="74" selection-end-column="50" />
+        <state relative-caret-position="86">
+          <caret line="331" column="44" selection-start-line="331" selection-start-column="44" selection-end-line="331" selection-end-column="44" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>

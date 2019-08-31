@@ -26,18 +26,19 @@ var users = {};
 
 //when a user connects to our sever
 wss.on('connection', function(connection) {
-    console.log(Object.getOwnPropertyNames(users).length);
+    //console.log(Object.getOwnPropertyNames(users).length);
+    console.log("One user connected");
     if(Object.getOwnPropertyNames(users).length >= 2){
+        //给连接的客户端返回信息，并关闭这个客户端本身
         sendToClient(connection, {
-            type: "normalinfo",
+            type: "erralert",
             info: "超过最大连接数<br>（设计为点对点，只允许两个用户连接websocket）",
             close: true
 
         });
-        return;
+        //return;
     }
 
-    console.log("One user connected");
     //when server gets a message from a connected user
     connection.on('message', function(message) {
         var data;
@@ -53,7 +54,7 @@ wss.on('connection', function(connection) {
             //when a user tries to login
             case "login":
                 console.log("User logged", data.name);
-                //if anyone is logged in with this username then refuse
+                //不允许重复用户名登进服务器if anyone is logged in with this username then refuse
                 if(users[data.name]) {
                     sendToClient(connection, {
                         type: "login",
@@ -87,7 +88,7 @@ wss.on('connection', function(connection) {
                     //要连接的用户不存在！！！
                     //否则直接给发送方返回要连接的用户不存在的消息
                     sendToClient(connection, {
-                        type: "normalinfo",
+                        type: "erralert",
                         info: "user not exist",
                         close: false
                     });
@@ -124,6 +125,16 @@ wss.on('connection', function(connection) {
                 if(conn != null) {
                     sendToClient(conn, {
                         type: "leave"
+                    });
+                }
+                break;
+            case "erralert":
+                var conn = users[data.name];
+                if(conn != null) {
+                    sendToClient(conn, {
+                        type: "erralert",
+                        info: data.info,
+                        close: data.close
                     });
                 }
                 break;
