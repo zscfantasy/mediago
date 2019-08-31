@@ -26,8 +26,18 @@ var users = {};
 
 //when a user connects to our sever
 wss.on('connection', function(connection) {
+    console.log(Object.getOwnPropertyNames(users).length);
+    if(Object.getOwnPropertyNames(users).length >= 2){
+        sendToClient(connection, {
+            type: "normalinfo",
+            info: "超过最大连接数<br>（设计为点对点，只允许两个用户连接websocket）",
+            close: true
 
-    console.log("User connected");
+        });
+        return;
+    }
+
+    console.log("One user connected");
     //when server gets a message from a connected user
     connection.on('message', function(message) {
         var data;
@@ -64,6 +74,7 @@ wss.on('connection', function(connection) {
                 console.log("Sending offer to: ", data.name);
                 //if UserB exists then send him offer details
                 var conn = users[data.name];
+                //判断要连接的用户在用户连接列表里面是否存在已经和服务器创建了连接，如果不存在则返回。
                 if(conn != null) {
                     //setting that UserA connected with UserB
                     connection.otherName = data.name;
@@ -72,6 +83,15 @@ wss.on('connection', function(connection) {
                         offer: data.offer,
                         name: connection.name
                     });
+                }else{
+                    //要连接的用户不存在！！！
+                    //否则直接给发送方返回要连接的用户不存在的消息
+                    sendToClient(connection, {
+                        type: "normalinfo",
+                        info: "user not exist",
+                        close: false
+                    });
+
                 }
                 break;
             case "answer":
@@ -118,13 +138,15 @@ wss.on('connection', function(connection) {
     //when user exits, for example closes a browser window
     //this may help if we are still in "offer","answer" or "candidate" state
     connection.on("close", function() {
+        console.log("One user disconnected");
         if(connection.name) {
             delete users[connection.name];
             if(connection.otherName) {
                 console.log("Disconnecting from ", connection.otherName);
                 var conn = users[connection.otherName];
-                conn.otherName = null;
+                //conn.otherName = null;//delete from here
                 if(conn != null) {
+                    conn.otherName = null;//put here
                     sendToClient(conn, {
                         type: "leave"
                     });
