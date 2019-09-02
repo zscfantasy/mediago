@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Monitor Client by WebRTC</title>
+    <title>WebRTC Video Demo —— Source</title>
 
 </head>
 <style>
@@ -26,10 +26,7 @@
         top: 15px;
         right: 15px;
     }
-    #remoteVideo {
-        width: 500px;
-        height: 500px;
-    }
+
 </style>
 <body>
 <div id = "loginPage" class = "container text-center">
@@ -37,27 +34,31 @@
         <div class = "col-md-4 col-md-offset-4">
             <h2>WebRTC Video Demo. Please sign in</h2>
             <label for = "usernameInput" class = "sr-only">Login</label>
+            <input type = "email" id = "servernameInput" c
+                   lass = "form-control formgroup" placeholder = "Server Name"
+                   required = "" autofocus = "" value="118.25.176.33" readonly>
             <input type = "email" id = "usernameInput" c
                    lass = "form-control formgroup" placeholder = "Login"
-                   required = "" autofocus = "">
+                   required = "" autofocus = "" value="car">
             <button id = "loginBtn" class = "btn btn-lg btn-primary btnblock">
-                开始fpv之旅</button>
+                连接服务器</button>
         </div>
     </div>
 </div>
 <div id = "callPage" class = "call-page">
     <video id = "localVideo" autoplay></video>
+    <!--
     <video id = "remoteVideo" autoplay></video>
+    -->
     <div class = "row text-center">
         <div class = "col-md-12">
-            <input id = "callToUsernameInput" type = "text"
-                   placeholder = "username to call" />
-            <button id = "callBtn" class = "btn-success btn">呼叫</button>
-            <button id = "hangUpBtn" class = "btn-danger btn">断开</button>
+            <button id = "startBtn" class = "btn-success btn">打开摄像头</button>
+            <button id = "closeBtn" class = "btn-fail btn">关闭摄像头</button>
+            <button id = "hangUpBtn" class = "btn-danger btn">挂断</button>
         </div>
     </div>
 </div>
 <script src = "adapter.js"></script>
-<script src = "monitor.js"></script>
+<script src = "source.js"></script>
 </body>
 </html>

@@ -1,13 +1,13 @@
+/***
+ * 本文件是视频请求方逻辑，但是不是真正的请求。
+ * 它通过向另一方发送命令，让连接的另一方返回来请求我们自己
+ */
 //**********************
 //Init ws module
 //**********************
 var serverip = location.hostname;
 var serverurl = 'ws://'+serverip+":9091";
-//var conn = new WebSocket('ws://118.25.176.33:9091');
-//var conn = new WebSocket('ws://localhost:9091');
 var conn = new WebSocket(serverurl);
-//console.log(serverurl);
-
 
 //本地登录用户our username
 var myUsername = null;
@@ -34,7 +34,7 @@ var callBtn = document.querySelector('#callBtn');
 
 var hangUpBtn = document.querySelector('#hangUpBtn');
 
-var localVideo = document.querySelector('#localVideo');
+//var localVideo = document.querySelector('#localVideo');
 var remoteVideo = document.querySelector('#remoteVideo');
 
 loginPage.style.display = "block";
@@ -69,7 +69,7 @@ conn.onmessage = function (msg) {
         case "leave":
             handleLeave();
             break;
-        case "erralert":
+        case "sendinfo":
             alert(data.info);
             if(data.close == true){
                 //关闭页面在各大浏览器下不兼容，选择折衷的about:blank法
@@ -85,7 +85,11 @@ conn.onerror = function (err) {
     console.log("Got error", err);
 };
 
-//alias for sending JSON encoded messages
+/**
+ * alias for sending JSON encoded messages
+ * 发送给服务器，然后服务器再转发给另外一个客户端
+ * @param message
+ */
 function sendToServer(message) {
     //attach the other peer username to our messages
     if (connectedUsername) {
@@ -109,46 +113,38 @@ loginBtn.addEventListener("click", function (event) {
     }
 });
 
+/**
+ * 当登录进服务器时，服务器会回复给我们，需要根据成功还是失败进行处理
+ * @param success
+ */
 function handleLogin(success) {
     if (success === false) {
         alert("Ooops...try a different username");
     } else {
         loginPage.style.display = "none";
         callPage.style.display = "block";
-
+/*
         //getting local video stream
         navigator.mediaDevices.getUserMedia({
             video: true, audio: true
         }).then(streamHandler).catch(errorHandler);
-
+*/
     }
 };
 
-//when somebody sends us an offer
+/**
+ * when somebody sends us an offer
+ * @param offer 表示offer
+ * @param name  表示发送offer给我的人（另一方）
+ * @returns {Promise<void>}
+ */
 async function handleOffer(offer, name) {
     //如果没创建RTCPeerConnection,需要重新创建连接对象，否则不需要
     if(RTCPeerConnectionCreated == false) {
         initPeer();
     }
     connectedUsername = name;
-/*以下的代码，rollback只有火狐浏览器才支持
-    // We need to set the remote description to the received SDP offer
-    // so that our local WebRTC layer knows how to talk to the caller.
-    // if the singnaling is not stable state, use type rollback to roll
-    // the incomplete signaling peer connection back to "stable" state.
-    // Because we call setLocalDescription before, maybe the PeerConnection
-    // are still in "have-local-offer" state,so the process need to
-    // rollback to "stable" state before you can reuse the connection.
-    if (myPeerConnection.signalingState != "stable") {
-        await Promise.all([
-            myPeerConnection.setLocalDescription({type: "rollback"}),
-            myPeerConnection.setRemoteDescription(new RTCSessionDescription(offer))
-        ]);
-        return;
-    }else{
-        await myPeerConnection.setRemoteDescription(new RTCSessionDescription(offer));
-    }
-*/
+
     await myPeerConnection.setRemoteDescription(new RTCSessionDescription(offer));
     //create an answer to an offer
     myPeerConnection.createAnswer().then(function (answer) {
@@ -162,16 +158,27 @@ async function handleOffer(offer, name) {
     });
 };
 
-//when we got an answer from a remote user
+
+/**
+ * when we got an answer from a remote user
+ * @param answer 对方发过来的answer
+ * @returns {Promise<void>}
+ */
 async function handleAnswer(answer) {
     await myPeerConnection.setRemoteDescription(new RTCSessionDescription(answer));
 };
 
-//when we got an ice candidate from a remote user
+/**
+ * when we got an ice candidate from a remote user
+ * @param candidate 对方法发过来的candidate
+ */
 function handleCandidate(candidate) {
     myPeerConnection.addIceCandidate(new RTCIceCandidate(candidate));
 };
 
+/**
+ * 断开连接的处理逻辑
+ */
 function handleLeave() {
     //attention sequence
     connectedUsername = null;
@@ -184,12 +191,11 @@ function handleLeave() {
     myPeerConnection.ontrack = null;
     myPeerConnection.onsignalingstatechange = null;
     myPeerConnection.onicegatheringstatechange = null;
-    myPeerConnection.onnotificationneeded = null;
+    //myPeerConnection.onnotificationneeded = null;
     myPeerConnection.close();
     myPeerConnection = null;
-
     RTCPeerConnectionCreated = false;
-
+    //按钮相应的要变化
     hangUpBtn.disabled = true;
     callBtn.disabled = false;
 
@@ -200,31 +206,42 @@ callBtn.addEventListener("click", function () {
 
     //caller must init RTCPeerConnection
     initPeer();
-    //sendOffer，createOffer现在放到处理onnegotiationneeded的事件中去了
-/*
+    //发送命令逻辑
     var callToUsername = callToUsernameInput.value;
+    if (callToUsername === myUsername) {
+        alert("can't let you talk to yourself. That would be weird.");
+        return;
+    }
     if (callToUsername.length > 0) {
         connectedUsername = callToUsername;
-        // create an offer
-        myPeerConnection.createOffer().then(function(offer){
-            myPeerConnection.setLocalDescription(offer);
-            sendToServer({
-                type: "offer",
-                offer: offer
-            });
-        }).catch(function (error) {
-            alert("Error when creating an offer");
+        //通过浏览器的观察方不再发起请求，而是发起让对方发起createOffer的请求的命令。
+        //原因是因为如果发起请求方没有摄像头，则请求会失败
+        //但是如果应答方没有摄像头是没有关系的！
+
+        sendToServer({
+            type: "cmd"
         });
-    }
+
+/*      create an offer 弃用
+        let offer =  myPeerConnection.createOffer();
+        myPeerConnection.setLocalDescription(offer);
+        sendToServer({
+            type: "offer",
+            offer: offer
+        });
 */
 
+    }
 
 });
-//hang up
+
+
 hangUpBtn.addEventListener("click", function () {
-    //先通知挂断
+    //先通知挂断（如果是放在handleLeave里面是实现不了的，因为已经先挂断了）
+    //另外放到stateChange事件去触发也不是个好办法，同上
+    //按了按钮才会给对方发送挂断信息，直接关闭浏览器，对方是不会知道你已经挂断的
     sendToServer({
-        type: "erralert",
+        type: "sendinfo",
         info: "对方已挂断",
         close: false
     });
@@ -233,29 +250,44 @@ hangUpBtn.addEventListener("click", function () {
         type: "leave"
     });
     handleLeave();
-    //并告诉对方我已挂断
 
 });
 
-
-
+/**
+ * getUserMedia的then
+ * @param myStream
+ */
 function streamHandler(myStream) {
     stream = myStream;
     //displaying local video stream on the page
-    localVideo.srcObject = stream;
+    //localVideo.srcObject = stream;
     window.localStream  = stream;
 
 }
 
+/**
+ * getUserMedia的catch
+ * @param error
+ */
 function errorHandler(error) {
     console.log(error);
 }
 
+
 //using Google public stun server
 const configuration = {
     //"iceServers": [{ "url": "stun:stun2.1.google.com:19302" }]
-    "iceServers": [{ "urls": "stun:stun2.1.google.com:19302" }]
+    //"iceServers": [{ "urls": "stun:stun2.1.google.com:19302" }]
+    "iceServers": [{
+        'urls': [
+            'stun:stun.l.google.com:19302',
+            'stun:stun1.l.google.com:19302',
+            'stun:stun2.l.google.com:19302',
+            'stun:stun.l.google.com:19302?transport=udp',
+        ]
+    }]
 };
+
 //**********************
 //Init a peer connection
 //**********************
@@ -265,14 +297,16 @@ function initPeer()
     try {
         myPeerConnection = new RTCPeerConnection(configuration);
         //add stream to local first
+        /*
         if ("addTrack" in myPeerConnection) {
-            /* use addTrack */
+            // use addTrack
             stream.getTracks().forEach(track => {
                 myPeerConnection.addTrack(track, stream);
             });
         } else {
             myPeerConnection.addStream(stream);
         }
+        */
         //**********************
         //Register event process needed
         //**********************
@@ -295,7 +329,7 @@ function initPeer()
         myPeerConnection.oniceconnectionstatechange = handleIceConnectionStateChangeEvent;
         myPeerConnection.onicegatheringstatechange = handleIceGatheringStateChangeEvent;
         myPeerConnection.onsignalingstatechange = handleSignalingStateChangeEvent;
-        myPeerConnection.onnegotiationneeded = handleNegotiationNeededEvent;
+        //myPeerConnection.onnegotiationneeded = handleNegotiationNeededEvent;
 
         RTCPeerConnectionCreated = true;
     }catch (e) {
@@ -352,7 +386,6 @@ async function handleRemoteStreamAdded(e) {
 // when the ICE connection is closed, failed, or disconnected.
 //
 // This is called when the state of the ICE agent changes.
-
 async function handleIceConnectionStateChangeEvent(event) {
     console.log("*** ICE connection state changed to " + myPeerConnection.iceConnectionState);
 
@@ -374,7 +407,6 @@ async function handleIceConnectionStateChangeEvent(event) {
 //
 // We don't need to do anything when this happens, but we log it to the
 // console so you can see what's going on when playing with the sample.
-
 async function handleIceGatheringStateChangeEvent(event) {
     console.log("*** ICE gathering state changed to: " + myPeerConnection.iceGatheringState);
 }
@@ -385,7 +417,6 @@ async function handleIceGatheringStateChangeEvent(event) {
 // NOTE: This will actually move to the new RTCPeerConnectionState enum
 // returned in the property RTCPeerConnection.connectionState when
 // browsers catch up with the latest version of the specification!
-
 async function handleSignalingStateChangeEvent(event) {
     if(myPeerConnection == null){
         return;
@@ -398,83 +429,4 @@ async function handleSignalingStateChangeEvent(event) {
     }
 }
 
-//Called by the WebRTC layer to let us know when it's time to
-// begin, resume, or restart ICE negotiation.
 
-async function handleNegotiationNeededEvent() {
-    console.log("*** Negotiation needed event");
-
-    try {
-        // If the connection hasn't yet achieved the "stable" state,
-        // return to the caller. Another negotiationneeded event
-        // will be fired when the state stabilizes.
-        if (myPeerConnection.signalingState != "stable") {
-            console.log("-- The connection isn't stable yet; postponing...")
-            //await myPeerConnection.setLocalDescription({type: "rollback"});//目前只有火狐支持
-            return;
-        }
-
-        console.log("---> Creating offer");
-
-        var callToUsername = callToUsernameInput.value;
-        if (callToUsername === myUsername) {
-            alert("can't let you talk to yourself. That would be weird.");
-            return;
-        }
-        if (callToUsername.length > 0) {
-            connectedUsername = callToUsername;
-            // create an offer
-
-            //method1
-            const offer = await myPeerConnection.createOffer();
-            await myPeerConnection.setLocalDescription(offer);
-            sendToServer({
-                type: "offer",
-                offer: offer
-            });
-
-            // 用promise方法，每次a呼叫b，主动断开，再由b呼叫a，
-            // 就会导致myPeerConnection处于have-local-offer的非stable状态。
-            /*
-            //method2
-            myPeerConnection.createOffer().then(function(offer){
-                //这种写法每次到这里返回的总是为have-local-offer状态很奇怪
-                console.log('[Negotiation]cur signalstate:'+myPeerConnection.signalingState);
-                myPeerConnection.setLocalDescription(offer);
-                sendToServer({
-                    type: "offer",
-                    offer: offer
-                });
-            }).catch(function (error) {
-                console.log(`Error ${error.name}: ${error.message}`);
-                alert("Error when creating an offer");
-            });
-            */
-
-            /*
-            //method3
-            //这里的promise多用了一个then,但是有问题
-            //offer和myPeerConnection.localDescription等价
-            myPeerConnection.createOffer().then(function(offer) {
-                //和上面一样，这种写法每次到这里返回的总是为have-local-offer状态很奇怪
-                return myPeerConnection.setLocalDescription(offer);
-                //myPeerConnection.setLocalDescription(offer);
-            }).then(function(){
-                sendToServer({
-                    type: "offer",
-                    offer: myPeerConnection.localDescription
-                });
-            }).catch(function (error) {
-                console.log(`Error ${error.name}: ${error.message}`);
-                alert("Error when creating an offer");
-            });
-            */
-
-        }
-
-    } catch(err) {
-        console.log("*** The following error occurred while handling the negotiationneeded event:");
-        //reportError(err);
-        console.log(`Error ${err.name}: ${err.message}`);
-    };
-}

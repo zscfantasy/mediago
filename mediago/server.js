@@ -26,12 +26,13 @@ var users = {};
 
 //when a user connects to our sever
 wss.on('connection', function(connection) {
-    //console.log(Object.getOwnPropertyNames(users).length);
+    //connection表示当前连接的from
+    //users[data.name]表示当前连接的to
     console.log("One user connected");
     if(Object.getOwnPropertyNames(users).length >= 2){
         //给连接的客户端返回信息，并关闭这个客户端本身
         sendToClient(connection, {
-            type: "erralert",
+            type: "sendinfo",
             info: "超过最大连接数<br>（设计为点对点，只允许两个用户连接websocket）",
             close: true
 
@@ -88,7 +89,7 @@ wss.on('connection', function(connection) {
                     //要连接的用户不存在！！！
                     //否则直接给发送方返回要连接的用户不存在的消息
                     sendToClient(connection, {
-                        type: "erralert",
+                        type: "sendinfo",
                         info: "user not exist",
                         close: false
                     });
@@ -128,11 +129,22 @@ wss.on('connection', function(connection) {
                     });
                 }
                 break;
-            case "erralert":
+            case "cmd":
+                console.log('I want to cmd User:', data.name);
+                var conn = users[data.name];
+                if(conn != null) {
+                    console.log('Server sended');
+                    sendToClient(conn, {
+                        type: "cmd",
+                        sender: connection.name
+                    });
+                }
+                break;
+            case "sendinfo":
                 var conn = users[data.name];
                 if(conn != null) {
                     sendToClient(conn, {
-                        type: "erralert",
+                        type: "sendinfo",
                         info: data.info,
                         close: data.close
                     });
