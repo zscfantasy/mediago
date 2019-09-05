@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="073be73b-0969-4711-91af-6140a0b49676" name="Default Changelist" comment="20190831">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monitor/monitor.html" beforeDir="false" afterPath="$PROJECT_DIR$/monitor/monitor.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monitor/monitor.js" beforeDir="false" afterPath="$PROJECT_DIR$/monitor/monitor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/adapter.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/source.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/source.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mediasource/source.js" beforeDir="false" afterPath="$PROJECT_DIR$/../mediasource/source.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,61 +17,44 @@
     <favorites_list name="mediago" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.559799">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/monitor/monitor.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="121">
-                  <caret line="22" column="18" lean-forward="true" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/server.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-770">
-                  <caret line="29" column="31" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/../source/source.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="3640">
-                  <caret line="252" column="15" selection-start-line="252" selection-start-column="9" selection-end-line="252" selection-end-column="15" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/monitor/monitor.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="195">
-                  <caret line="251" column="10" selection-start-line="251" selection-start-column="10" selection-end-line="251" selection-end-column="10" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$USER_HOME$/Develop/webrtc-web-master/step-01/js/main.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="156">
-                  <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/monitor/monitor.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="14" selection-end-line="184" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/monitor/monitor.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="438">
+              <caret line="295" column="56" selection-start-line="295" selection-start-column="56" selection-end-line="295" selection-end-column="56" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../mediasource/source.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3435">
+              <caret line="229" column="29" selection-start-line="229" selection-start-column="29" selection-end-line="229" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -106,11 +83,11 @@
       <find>autoLogin</find>
       <find>localVideo</find>
       <find>seem</find>
-      <find>hangUpBtn</find>
       <find>remoteVideo</find>
       <find>对方已</find>
       <find>StartBtn</find>
       <find>stream</find>
+      <find>hangUpBtn</find>
     </findStrings>
     <replaceStrings>
       <replace>sendToSever</replace>
@@ -122,7 +99,7 @@
     </replaceStrings>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -131,12 +108,13 @@
         <option value="$PROJECT_DIR$/client/client.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/monitor2.html" />
-        <option value="$PROJECT_DIR$/monitor/monitor.html" />
         <option value="$PROJECT_DIR$/source/source.html" />
         <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/source/source.js" />
-        <option value="$PROJECT_DIR$/monitor/monitor.js" />
         <option value="$PROJECT_DIR$/../source/source.js" />
+        <option value="$PROJECT_DIR$/../mediasource/source.js" />
+        <option value="$PROJECT_DIR$/monitor/monitor.html" />
+        <option value="$PROJECT_DIR$/monitor/monitor.js" />
       </list>
     </option>
   </component>
@@ -157,11 +135,6 @@
             <path>
               <item name="mediago" type="b2602c69:ProjectViewProjectNode" />
               <item name="mediago" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mediago" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mediago" type="462c0819:PsiDirectoryNode" />
-              <item name="monitor" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mediago" type="b2602c69:ProjectViewProjectNode" />
@@ -193,11 +166,12 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="10.16.3" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -237,18 +211,21 @@
       <workItem from="1567217532436" duration="23502000" />
       <workItem from="1567269550700" duration="3112000" />
       <workItem from="1567315365453" duration="10792000" />
+      <workItem from="1567395334946" duration="2941000" />
+      <workItem from="1567438022639" duration="172000" />
+      <workItem from="1567481645754" duration="679000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70627000" />
+    <option name="totallyTimeSpent" value="74419000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="801" extended-state="0" />
     <layout>
       <window_info id="npm" order="0" sideWeight="0.50614756" side_tool="true" weight="0.1663143" />
       <window_info id="Favorites" order="1" show_stripe_button="false" sideWeight="0.50614756" side_tool="true" weight="0.1663143" />
-      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49385247" visible="true" weight="0.12160229" />
+      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49385247" visible="true" weight="0.20314735" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3300423" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32863188" />
@@ -259,11 +236,11 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.2693935" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.2693935" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" id="Structure" order="3" sideWeight="0.50614756" visible="true" weight="0.16666667" />
+      <window_info anchor="right" id="Structure" order="3" sideWeight="0.50614756" visible="true" weight="0.16666667" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19027483" />
@@ -339,40 +316,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../mediago-local-bkup/monitor/monitor.js">
+    <entry file="file://$PROJECT_DIR$/../mediago-local-bkup/monitor/monitor.js" />
+    <entry file="file://$PROJECT_DIR$/../mediago-local/monitor/monitor.js" />
+    <entry file="file://$PROJECT_DIR$/../mediago-online/monitor/monitor.js" />
+    <entry file="file://$PROJECT_DIR$/source/source.html" />
+    <entry file="file://$PROJECT_DIR$/source/source.js" />
+    <entry file="file://$PROJECT_DIR$/../source/source.js" />
+    <entry file="file://$USER_HOME$/Develop/webrtc-web-master/step-01/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="198" column="7" selection-start-line="198" selection-end-line="198" selection-end-column="7" />
+        <state relative-caret-position="156">
+          <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../mediago-local/monitor/monitor.js">
+    <entry file="file://$PROJECT_DIR$/../mediasource/adapter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1280">
-          <caret line="119" column="12" lean-forward="true" selection-start-line="119" selection-start-column="12" selection-end-line="119" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../mediago-online/monitor/monitor.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6727">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/source.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-248">
-          <caret line="12" column="31" lean-forward="true" selection-start-line="12" selection-start-column="31" selection-end-line="12" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/source.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="71" selection-start-line="1" selection-start-column="71" selection-end-line="1" selection-end-column="71" />
+        <state>
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -381,36 +340,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/monitor/monitor.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="22" column="18" lean-forward="true" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
+        <state relative-caret-position="300">
+          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-770">
-          <caret line="29" column="31" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
+        <state relative-caret-position="210">
+          <caret line="14" selection-end-line="184" selection-end-column="1" />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mediasource/source.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3435">
+          <caret line="229" column="29" selection-start-line="229" selection-start-column="29" selection-end-line="229" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/纯css3云彩动画效果/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2371" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/monitor/monitor.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="251" column="10" selection-start-line="251" selection-start-column="10" selection-end-line="251" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../source/source.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3640">
-          <caret line="252" column="15" selection-start-line="252" selection-start-column="9" selection-end-line="252" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Develop/webrtc-web-master/step-01/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+        <state relative-caret-position="438">
+          <caret line="295" column="56" selection-start-line="295" selection-start-column="56" selection-end-line="295" selection-end-column="56" />
         </state>
       </provider>
     </entry>

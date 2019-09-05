@@ -293,9 +293,11 @@ const configuration = {
 //**********************
 function initPeer()
 {
+    //因为各浏览器差异，RTCPeerConnection 一样需要加上前缀。火狐浏览器的前缀需要再论证。
+    let PeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection || window.mozRTCPeerConnection ;
 
     try {
-        myPeerConnection = new RTCPeerConnection(configuration);
+        myPeerConnection = new PeerConnection(configuration);
         //add stream to local first
         /*
         if ("addTrack" in myPeerConnection) {
@@ -313,10 +315,12 @@ function initPeer()
         // setup stream listening
         if ("ontrack" in myPeerConnection) {
             //when a remote user adds stream to the peer connection, we display it
+            console.log("use ontrack");
             myPeerConnection.ontrack = handleRemoteTrackAdded;
 
         } else {
             //when a remote user adds stream to the peer connection, we display it
+            console.log("use onaddstream");
             myPeerConnection.onaddstream = handleRemoteStreamAdded;
             /*
             myPeerConnection.onremovestream = function (e) {
