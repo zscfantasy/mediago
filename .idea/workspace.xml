@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="70c9e27f-e9ff-4dca-849c-51ead310bb9b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/mediago/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mediago/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mediago/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mediago/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mediago/monitor/adapter.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mediago/monitor/monitor.html" beforeDir="false" afterPath="$PROJECT_DIR$/mediago/monitor/monitor.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mediago/monitor/monitor.js" beforeDir="false" afterPath="$PROJECT_DIR$/mediago/monitor/monitor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mediasource/adapter.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mediasource/source.js" beforeDir="false" afterPath="$PROJECT_DIR$/mediasource/source.js" afterDir="false" />
-    </list>
+    <list default="true" id="70c9e27f-e9ff-4dca-849c-51ead310bb9b" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -116,6 +108,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -144,16 +137,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1567687495937</updated>
-      <workItem from="1567687498272" duration="1292000" />
+      <workItem from="1567687498272" duration="1356000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1292000" />
+    <option name="totallyTimeSpent" value="1356000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="801" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="1" sideWeight="0.4992948" visible="true" weight="0.19170243" />
