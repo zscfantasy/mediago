@@ -1,7 +1,8 @@
 'use strict';
 //本js作为webrtc的一部分。负责采集视频流，并在收到对方的cmd命令后，把视频发送给对方
-//设计思路是本地采集和webrtc RTCPeerConnection分开处理。本地不猜忌视频，就不初始化RTCPeerConnection
+//设计思路是本地采集和webrtc RTCPeerConnection分开处理。本地不采集视频，就不初始化RTCPeerConnection
 
+/*
 //var conn = new WebSocket('ws://118.25.176.33:9091');
 //var conn = new WebSocket('ws://localhost:9091');
 var servernameInput = document.querySelector('#servernameInput');
@@ -9,6 +10,8 @@ var servername = servernameInput.value;
 servername = servername.replace(/(^\s*)|(\s*$)/g, ""); 	//替换输入内容当中所有的空字符，包括全角空格，半角都替换""
 var serverurl = 'ws://'+servername+":9091";
 var conn = new WebSocket(serverurl);
+*/
+var conn;
 
 //本地登录用户our username
 var myUsername = null;
@@ -26,6 +29,7 @@ var RTCPeerConnectionCreated = false;
 //******
 var loginPage = document.querySelector('#loginPage');
 var loginBtn = document.querySelector('#loginBtn');
+var wsBtn = document.querySelector('#wsBtn');
 //var servernameInput = document.querySelector('#servernameInput');  //放到上面去了
 var usernameInput = document.querySelector('#usernameInput');
 
@@ -39,7 +43,69 @@ var localVideo = document.querySelector('#localVideo');
 
 loginPage.style.display = "block";
 callPage.style.display = "none";
+loginBtn.disabled = true;
 
+wsBtn.addEventListener("click", function () {
+
+    var servernameInput = document.querySelector('#servernameInput');
+    var servername = servernameInput.value;
+    servername = servername.replace(/(^\s*)|(\s*$)/g, ""); 	//替换输入内容当中所有的空字符，包括全角空格，半角都替换""
+    var serverurl = 'ws://'+servername+":9091";
+    conn = new WebSocket(serverurl);
+
+    //when we got a message from a signaling server
+    conn.onmessage = function (msg) {
+        console.log("Got message", msg.data);
+        var data = JSON.parse(msg.data);
+        switch(data.type) {
+            case "login":
+                handleLogin(data.success);
+                break;
+            //when somebody wants to call us
+            case "offer":
+                handleOffer(data.offer, data.name);
+                break;
+            case "answer":
+                handleAnswer(data.answer);
+                break;
+            //when a remote peer sends an ice candidate to us
+            case "candidate":
+                handleCandidate(data.candidate);
+                break;
+            case "leave":
+                handleLeave();
+                break;
+            case "cmd":
+                handleCmd(data.sender);
+                break;
+            case "sendinfo":
+                alert(data.info);
+                if(data.close == true){
+                    //关闭页面在各大浏览器下不兼容，选择折衷的about:blank法
+                    window.location.href="about:blank";
+                }
+                break;
+            default:
+                break;
+        }
+    };
+
+    conn.onerror = function (err) {
+        console.log("Got error", err);
+    };
+
+    //******
+    //ws eventHandler
+    //******
+    conn.onopen = function () {
+        console.log("Connected to the signaling server");
+    };
+
+    //set btn valid
+    loginBtn.disabled = false;
+    wsBtn.disabled = true;
+
+});
 //******
 //execute main
 //******
@@ -59,57 +125,8 @@ loginBtn.addEventListener("click", function () {
 
 });
 
-//******
-//UI events definitatoin
-//******
 
-//when we got a message from a signaling server
-conn.onmessage = function (msg) {
-    console.log("Got message", msg.data);
-    var data = JSON.parse(msg.data);
-    switch(data.type) {
-        case "login":
-            handleLogin(data.success);
-            break;
-        //when somebody wants to call us
-        case "offer":
-            handleOffer(data.offer, data.name);
-            break;
-        case "answer":
-            handleAnswer(data.answer);
-            break;
-        //when a remote peer sends an ice candidate to us
-        case "candidate":
-            handleCandidate(data.candidate);
-            break;
-        case "leave":
-            handleLeave();
-            break;
-        case "cmd":
-            handleCmd(data.sender);
-            break;
-        case "sendinfo":
-            alert(data.info);
-            if(data.close == true){
-                //关闭页面在各大浏览器下不兼容，选择折衷的about:blank法
-                window.location.href="about:blank";
-            }
-            break;
-        default:
-            break;
-    }
-};
 
-conn.onerror = function (err) {
-    console.log("Got error", err);
-};
-
-//******
-//ws eventHandler
-//******
-conn.onopen = function () {
-    console.log("Connected to the signaling server");
-};
 
 /**
  * alias for sending JSON encoded messages
